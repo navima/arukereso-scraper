@@ -53,3 +53,8 @@ Returns: `string[]` (CSV)
 ```powershell
 curl https://www.userbenchmark.com/resources/download/csv/GPU_UserBenchmarks.csv > .\GPU_UserBenchmarks.csv
 ```
+
+### Refreshing the worksheet
+
+(On the ribbon)  
+Data > Refresh All
