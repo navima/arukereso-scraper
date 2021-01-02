@@ -1,7 +1,14 @@
-param(
+param (
     [parameter(ValueFromPipeline = $true)][string[]]$types = @()
 )
 
+#Requires -Version 7
+
+# Install the module on demand
+If (-not (Get-Module -ErrorAction Ignore -ListAvailable PowerHTML)) {
+    Write-Verbose "Installing PowerHTML module for the current user..."
+    Install-Module PowerHTML -ErrorAction Stop
+}
 Import-Module -ErrorAction Stop PowerHTML
 
 function Get-MinPrice {
@@ -38,7 +45,7 @@ function Get-MinPrices {
 
     $ress = @{}
 
-    $typeNames | % {
+    $typeNames | ForEach-Object {
         $res = Get-MinPrice($_)
         $ress.Add($_, $res)
     }
@@ -48,6 +55,7 @@ function Get-MinPrices {
 
 $types > dsa.txt
 $ret = Get-MinPrices($types)
-[string[]] $retstr = ($ret | Out-String -Stream) -ne '' | select -Skip 2
-Write-Output $retstr
+#[string[]] $retstr = ($ret | Out-String -Stream) -ne '' | Select-Object -Skip 2
+$sasd = $ret.GetEnumerator() | Select-Object name, value | ConvertTo-Csv
 Write-Information $ret -InformationAction Continue
+Write-Output $sasd
