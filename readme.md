@@ -1,6 +1,6 @@
 # Árukereső Scraper
 
-PowerShell scripts to scrape a certain *certain* websites.
+PowerShell scripts to scrape a *certain* website.
 
 Also a summarizing Excel Worksheet
 
