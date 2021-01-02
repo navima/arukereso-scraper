@@ -1,6 +1,6 @@
-# PPPS1
+# Árukereső Scraper
 
-PowerShell scripts to scrape *certain* websites.
+PowerShell scripts to scrape a certain *certain* websites.
 
 Also a summarizing Excel Worksheet
 
