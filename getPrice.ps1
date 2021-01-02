@@ -53,9 +53,12 @@ function Get-MinPrices {
     Return $ress
 }
 
-$types > dsa.txt
 $ret = Get-MinPrices($types)
-#[string[]] $retstr = ($ret | Out-String -Stream) -ne '' | Select-Object -Skip 2
-$sasd = $ret.GetEnumerator() | Select-Object name, value | ConvertTo-Csv
-Write-Information $ret -InformationAction Continue
-Write-Output $sasd
+
+$sorted = $ret.GetEnumerator() | Sort-Object -Property key
+
+$csv = $sorted | Select-Object name, value | ConvertTo-Csv
+$str = $sorted | Out-String
+
+Write-Information $str -InformationAction Continue
+Write-Output $csv
