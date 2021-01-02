@@ -15,7 +15,7 @@ You will be prompted to install PowerHTML if it isn't detected
 
 ### Other
 
-* The Excel Worksheet has PowerQuery queries to the filenames in the _[Example:](#example:)_ section;  
+* The Excel Worksheet has PowerQuery queries to the filenames in the _[Example:](#example)_ section;  
 The paths are dynamic, so the .xlsx, and .csv files need only be in the same folder.  
 I don't know if other software support PowerQuery, so I assume this can only be worked with in MS Excel.
 
