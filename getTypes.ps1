@@ -8,13 +8,8 @@ param (
 
 # Install the module on demand
 If (-not (Get-Module -ErrorAction Ignore -ListAvailable PowerHTML)) {
-    If (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
-        Write-Information "Run this script in Admin, or install PowerHTML in an Admin prompt." -InformationAction Continue
-        Write-Information "Install-Module PowerHTML -ErrorAction Stop" -InformationAction Continue
-        Break
-    }
     Write-Verbose "Installing PowerHTML module for the current user..."
-    Install-Module PowerHTML -ErrorAction Stop
+    Install-Module -Name PowerHTML -Scope CurrentUser -ErrorAction Stop
 }
 Import-Module -ErrorAction Stop PowerHTML
 
