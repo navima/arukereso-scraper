@@ -1,5 +1,4 @@
-*.arukereso_prices.txt
 *.html
 ~$gpucompare.xlsx
-
 *.csv
+!/docs/*
