@@ -21,6 +21,8 @@ jobs:
         run: |
           .\archive.ps1
           mv *.csv arch/ 
+          cd arch/
+          ..\merge.ps1
           ls
           ls arch/
 
