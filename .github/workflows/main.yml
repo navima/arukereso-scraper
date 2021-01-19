@@ -15,26 +15,10 @@ jobs:
       - name: Make dir
         run: mkdir public
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo "Talan igy?" >> ./public/index.html
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Run Script
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
-          
-      - name: Get PS version
-        run: $PSVersionTable.PSVersion
-          
-      - name: ls
-        run: ls
-        shell: powershell
-          
-      - name: do gettypes
-        run: |
-          .\getTypes.ps1 'https://www.arukereso.hu' 'videokartya-c3142' 5 > ./public/index.html
+          echo (Get-date -format "yyyy-MM-dd") > ./public/index.html
+          .\getTypes.ps1 'https://www.arukereso.hu' 'videokartya-c3142' 5 | .\getPrice.ps1 > ./public/prices.csv
           
       - name: GitHub Pages action
         uses: peaceiris/actions-gh-pages@v3.7.3
