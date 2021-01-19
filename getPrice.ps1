@@ -7,7 +7,7 @@ param (
 # Install the module on demand
 If (-not (Get-Module -ErrorAction Ignore -ListAvailable PowerHTML)) {
     Write-Verbose "Installing PowerHTML module for the current user..."
-    Install-Module -Name PowerHTML -Scope CurrentUser -ErrorAction Stop
+    Install-Module -Name PowerHTML -Scope CurrentUser -Force -ErrorAction Stop
 }
 Import-Module -ErrorAction Stop PowerHTML
 
