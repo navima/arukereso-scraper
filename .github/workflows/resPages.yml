@@ -15,16 +15,19 @@ jobs:
         with:
           path: arch
           ref: archive
-          
-      - run: mkdir public
-        
+      - uses: actions/checkout@v2
+        with:
+          path: public
+          ref: gh-pages
+                
       - run: |
           cd arch\
           ..\generateHTML.ps1
-          mv *.html ..\public
+          mv *.html ..\public -Force
+          cd ..\public
           
-      - name: GitHub Pages action
-        uses: peaceiris/actions-gh-pages@v3.7.3
+      - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
+          branch: 'gh-pages'
+          repository: 'public'
+          skip_dirty_check: true
