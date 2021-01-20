@@ -24,7 +24,7 @@ jobs:
           cd arch\
           ..\generateHTML.ps1
           mv *.html ..\public -Force
-          cd ..\public
+          cd ..
           
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
