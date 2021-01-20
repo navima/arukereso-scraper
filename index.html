@@ -1,1 +1,351 @@
-2021-01-19
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+
+    function transposeDataTable(dataTable) {
+        //step 1: let us get what the columns would be
+        var rows = [];//the row tip becomes the column header and the rest become
+        for (var rowIdx = 0; rowIdx < dataTable.getNumberOfRows(); rowIdx++) {
+            var rowData = [];
+            for (var colIdx = 0; colIdx < dataTable.getNumberOfColumns(); colIdx++) {
+                rowData.push(dataTable.getValue(rowIdx, colIdx));
+            }
+            rows.push(rowData);
+        }
+        var newTB = new google.visualization.DataTable();
+        newTB.addColumn('string', dataTable.getColumnLabel(0));
+        newTB.addRows(dataTable.getNumberOfColumns() - 1);
+        var colIdx = 1;
+        for (var idx = 0; idx < (dataTable.getNumberOfColumns() - 1); idx++) {
+            var colLabel = dataTable.getColumnLabel(colIdx);
+            newTB.setValue(idx, 0, colLabel);
+            colIdx++;
+        }
+        for (var i = 0; i < rows.length; i++) {
+            var rowData = rows[i];
+            console.log(rowData[0]);
+            newTB.addColumn('number', rowData[0]); //assuming the first one is always a header
+            var localRowIdx = 0;
+
+            for (var j = 1; j < rowData.length; j++) {
+                newTB.setValue(localRowIdx, (i + 1), rowData[j]);
+                localRowIdx++;
+            }
+        }
+        return newTB;
+    }
+
+    function drawChart() {
+
+        var mydata = google.visualization.arrayToDataTable([["Name","2021-01-02","2021-01-03","2021-01-06","2021-01-09","2021-01-12","2021-01-15","2021-01-16","2021-01-18","2021-01-20"], ["210","13630","13630","13630","13590","13580","12170","12120","12030","12090"], ["gt-1030","25380","25380","25230","25100","25320","24390","24990","24990","25970"], ["gt-710","12020","12020","11490","11610","11930","12000","11840","12000","11900"], ["gt-730","18990","20080","19640","19400","19850","19780","19780","20080","19880"], ["gtx-1050","54990","54990","51480","41815","54990","54990","54730","54990","54780"], ["gtx-1050-ti","49199","49199","55190","56990","58990","51275","58990","61631","58558"], ["gtx-1060","179924","179924","90330","179924","179924","174701","174701","174701","174701"], ["gtx-1070","179990","179990","179990","179990","179990","","","",""], ["gtx-1650","52990","59900","59900","57900","57900","66990","67380","71600","70270"], ["gtx-1650-super","65900","65900","65900","65900","65900","134946","133789","133789","109900"], ["gtx-1660","89990","89990","89990","76900","76900","","139900","124990","119900"], ["gtx-1660-super","91900","91900","91900","110900","110900","99140","149990","134990","139990"], ["gtx-1660-ti","112070","112070","128990","118140","118140","119322","118140","118140","102246"], ["p1000","117296","116107","115460","114370","117900","115912","115912","121000","121000"], ["p2000","173580","173580","170980","170880","170150","170580","168010","170150","168450"], ["p2200","168420","168376","165890","165771","164440","168530","164440","165740","164080"], ["p4000","303070","303070","298520","298409","298409","274900","274900","274900","274900"], ["p620","70450","70450","70450","69880","72320","64654","64642","64699","64699"], ["r7-240","26420","26420","25780","25780","26160","27840","27420","27840","27560"], ["rtx-2060","135900","135900","135900","135900","135900","","","",""], ["rtx-2070-super","","","","","","","","",""], ["rtx-2080-super","242820","242820","242820","242820","242820","","","","356390"], ["rtx-2080-ti","499990","499990","499990","499990","499990","399990","399990","499990","499990"], ["rtx-3060-ti","256990","256990","256990","239990","269990","299990","355990","","359990"], ["rtx-3070","293990","293990","257590","278240","299000","304990","309990","344990","329900"], ["rtx-3080","447990","447990","470056","409990","489990","","529990","529990",""], ["rtx-3090","641390","641390","641390","649786","735330","735330","643306","771990","769990"], ["rtx-4000","339049","336027","339049","336027","336027","336027","337000","338000","345280"], ["rtx-5000","786520","786520","774720","774720","786520","786520","774720","786520","778650"], ["rtx-6000","1800749","1800749","1779913","1733180","1778398","1772368","1746990","1772024","1754300"], ["rtx-8000","","","","2064090","","","2078080","","2080020"], ["rx-550","26190","27150","22290","28470","28900","29630","29620","29520","27189"], ["rx-5500-xt","76590","76590","76590","76590","76590","","109440","85500","105875"], ["rx-5600","157350","157350","157790","191880","177000","177000","","227660",""], ["rx-5600-xt","131690","131690","131690","131690","131690","","172500","",""], ["rx-570","65400","65400","64880","63900","63900","","126760","126760","125490"], ["rx-5700","145900","145900","145900","145900","145900","","","",""], ["rx-5700-xt","199900","199900","199000","162900","266680","","","327699",""], ["rx-580","77990","77990","81990","110840","110990","","128790","153471","120520"], ["rx-6800","416090","416090","415460","389900","389900","435900","389900","389900","392580"], ["rx-vega-56","161710","161710","161710","161710","","","","",""], ["wx-2100","55190","55190","54990","52490","52780","52790","52790","52790","52890"], ["wx-3100","68090","68090","67790","67190","67490","67490","67490","79190","79190"], ["wx-3200","71250","71250","71250","67090","67390","69780","71610","72100","72280"], ["wx-4100","106990","106990","106990","102990","103990","103990","103990","103990","104990"], ["wx-5100","152280","152280","152280","152280","152230","153630","146490","146790","146990"], ["wx-7100","","","","","285013","427566","283986","284239","283962"], ["wx-8200","401890","401890","401890","399720","394310","401900","403680","403680","407340"]])
+
+        var transposed = transposeDataTable(mydata)
+
+        var data = transposed;
+
+        var options = {
+            title: 'Company Performance',
+            //curveType: 'function',
+            legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+
+            var hide210 = document.getElementById("210");
+    hide210.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([0]);
+    chart.draw(view, options);
+    };
+     var hidegt_1030 = document.getElementById("gt-1030");
+    hidegt_1030.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([1]);
+    chart.draw(view, options);
+    };
+     var hidegt_710 = document.getElementById("gt-710");
+    hidegt_710.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([2]);
+    chart.draw(view, options);
+    };
+     var hidegt_730 = document.getElementById("gt-730");
+    hidegt_730.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([3]);
+    chart.draw(view, options);
+    };
+     var hidegtx_1050 = document.getElementById("gtx-1050");
+    hidegtx_1050.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([4]);
+    chart.draw(view, options);
+    };
+     var hidegtx_1050_ti = document.getElementById("gtx-1050-ti");
+    hidegtx_1050_ti.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([5]);
+    chart.draw(view, options);
+    };
+     var hidegtx_1060 = document.getElementById("gtx-1060");
+    hidegtx_1060.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([6]);
+    chart.draw(view, options);
+    };
+     var hidegtx_1070 = document.getElementById("gtx-1070");
+    hidegtx_1070.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([7]);
+    chart.draw(view, options);
+    };
+     var hidegtx_1650 = document.getElementById("gtx-1650");
+    hidegtx_1650.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([8]);
+    chart.draw(view, options);
+    };
+     var hidegtx_1650_super = document.getElementById("gtx-1650-super");
+    hidegtx_1650_super.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([9]);
+    chart.draw(view, options);
+    };
+     var hidegtx_1660 = document.getElementById("gtx-1660");
+    hidegtx_1660.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([10]);
+    chart.draw(view, options);
+    };
+     var hidegtx_1660_super = document.getElementById("gtx-1660-super");
+    hidegtx_1660_super.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([11]);
+    chart.draw(view, options);
+    };
+     var hidegtx_1660_ti = document.getElementById("gtx-1660-ti");
+    hidegtx_1660_ti.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([12]);
+    chart.draw(view, options);
+    };
+     var hidep1000 = document.getElementById("p1000");
+    hidep1000.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([13]);
+    chart.draw(view, options);
+    };
+     var hidep2000 = document.getElementById("p2000");
+    hidep2000.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([14]);
+    chart.draw(view, options);
+    };
+     var hidep2200 = document.getElementById("p2200");
+    hidep2200.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([15]);
+    chart.draw(view, options);
+    };
+     var hidep4000 = document.getElementById("p4000");
+    hidep4000.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([16]);
+    chart.draw(view, options);
+    };
+     var hidep620 = document.getElementById("p620");
+    hidep620.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([17]);
+    chart.draw(view, options);
+    };
+     var hider7_240 = document.getElementById("r7-240");
+    hider7_240.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([18]);
+    chart.draw(view, options);
+    };
+     var hidertx_2060 = document.getElementById("rtx-2060");
+    hidertx_2060.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([19]);
+    chart.draw(view, options);
+    };
+     var hidertx_2070_super = document.getElementById("rtx-2070-super");
+    hidertx_2070_super.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([20]);
+    chart.draw(view, options);
+    };
+     var hidertx_2080_super = document.getElementById("rtx-2080-super");
+    hidertx_2080_super.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([21]);
+    chart.draw(view, options);
+    };
+     var hidertx_2080_ti = document.getElementById("rtx-2080-ti");
+    hidertx_2080_ti.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([22]);
+    chart.draw(view, options);
+    };
+     var hidertx_3060_ti = document.getElementById("rtx-3060-ti");
+    hidertx_3060_ti.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([23]);
+    chart.draw(view, options);
+    };
+     var hidertx_3070 = document.getElementById("rtx-3070");
+    hidertx_3070.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([24]);
+    chart.draw(view, options);
+    };
+     var hidertx_3080 = document.getElementById("rtx-3080");
+    hidertx_3080.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([25]);
+    chart.draw(view, options);
+    };
+     var hidertx_3090 = document.getElementById("rtx-3090");
+    hidertx_3090.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([26]);
+    chart.draw(view, options);
+    };
+     var hidertx_4000 = document.getElementById("rtx-4000");
+    hidertx_4000.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([27]);
+    chart.draw(view, options);
+    };
+     var hidertx_5000 = document.getElementById("rtx-5000");
+    hidertx_5000.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([28]);
+    chart.draw(view, options);
+    };
+     var hidertx_6000 = document.getElementById("rtx-6000");
+    hidertx_6000.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([29]);
+    chart.draw(view, options);
+    };
+     var hidertx_8000 = document.getElementById("rtx-8000");
+    hidertx_8000.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([30]);
+    chart.draw(view, options);
+    };
+     var hiderx_550 = document.getElementById("rx-550");
+    hiderx_550.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([31]);
+    chart.draw(view, options);
+    };
+     var hiderx_5500_xt = document.getElementById("rx-5500-xt");
+    hiderx_5500_xt.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([32]);
+    chart.draw(view, options);
+    };
+     var hiderx_5600 = document.getElementById("rx-5600");
+    hiderx_5600.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([33]);
+    chart.draw(view, options);
+    };
+     var hiderx_5600_xt = document.getElementById("rx-5600-xt");
+    hiderx_5600_xt.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([34]);
+    chart.draw(view, options);
+    };
+     var hiderx_570 = document.getElementById("rx-570");
+    hiderx_570.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([35]);
+    chart.draw(view, options);
+    };
+     var hiderx_5700 = document.getElementById("rx-5700");
+    hiderx_5700.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([36]);
+    chart.draw(view, options);
+    };
+     var hiderx_5700_xt = document.getElementById("rx-5700-xt");
+    hiderx_5700_xt.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([37]);
+    chart.draw(view, options);
+    };
+     var hiderx_580 = document.getElementById("rx-580");
+    hiderx_580.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([38]);
+    chart.draw(view, options);
+    };
+     var hiderx_6800 = document.getElementById("rx-6800");
+    hiderx_6800.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([39]);
+    chart.draw(view, options);
+    };
+     var hiderx_vega_56 = document.getElementById("rx-vega-56");
+    hiderx_vega_56.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([40]);
+    chart.draw(view, options);
+    };
+     var hidewx_2100 = document.getElementById("wx-2100");
+    hidewx_2100.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([41]);
+    chart.draw(view, options);
+    };
+     var hidewx_3100 = document.getElementById("wx-3100");
+    hidewx_3100.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([42]);
+    chart.draw(view, options);
+    };
+     var hidewx_3200 = document.getElementById("wx-3200");
+    hidewx_3200.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([43]);
+    chart.draw(view, options);
+    };
+     var hidewx_4100 = document.getElementById("wx-4100");
+    hidewx_4100.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([44]);
+    chart.draw(view, options);
+    };
+     var hidewx_5100 = document.getElementById("wx-5100");
+    hidewx_5100.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([45]);
+    chart.draw(view, options);
+    };
+     var hidewx_7100 = document.getElementById("wx-7100");
+    hidewx_7100.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([46]);
+    chart.draw(view, options);
+    };
+     var hidewx_8200 = document.getElementById("wx-8200");
+    hidewx_8200.onclick = function () {
+    view = new google.visualization.DataView(data);
+    view.hideColumns([47]);
+    chart.draw(view, options);
+    };
+
+    }
+</script>
+
+<div id="curve_chart" style="width: 100%; height: 90%"></div>
+    <button type="button" id="210"  >210</button>     <button type="button" id="gt-1030"  >gt-1030</button>     <button type="button" id="gt-710"  >gt-710</button>     <button type="button" id="gt-730"  >gt-730</button>     <button type="button" id="gtx-1050"  >gtx-1050</button>     <button type="button" id="gtx-1050-ti"  >gtx-1050-ti</button>     <button type="button" id="gtx-1060"  >gtx-1060</button>     <button type="button" id="gtx-1070"  >gtx-1070</button>     <button type="button" id="gtx-1650"  >gtx-1650</button>     <button type="button" id="gtx-1650-super"  >gtx-1650-super</button>     <button type="button" id="gtx-1660"  >gtx-1660</button>     <button type="button" id="gtx-1660-super"  >gtx-1660-super</button>     <button type="button" id="gtx-1660-ti"  >gtx-1660-ti</button>     <button type="button" id="p1000"  >p1000</button>     <button type="button" id="p2000"  >p2000</button>     <button type="button" id="p2200"  >p2200</button>     <button type="button" id="p4000"  >p4000</button>     <button type="button" id="p620"  >p620</button>     <button type="button" id="r7-240"  >r7-240</button>     <button type="button" id="rtx-2060"  >rtx-2060</button>     <button type="button" id="rtx-2070-super"  >rtx-2070-super</button>     <button type="button" id="rtx-2080-super"  >rtx-2080-super</button>     <button type="button" id="rtx-2080-ti"  >rtx-2080-ti</button>     <button type="button" id="rtx-3060-ti"  >rtx-3060-ti</button>     <button type="button" id="rtx-3070"  >rtx-3070</button>     <button type="button" id="rtx-3080"  >rtx-3080</button>     <button type="button" id="rtx-3090"  >rtx-3090</button>     <button type="button" id="rtx-4000"  >rtx-4000</button>     <button type="button" id="rtx-5000"  >rtx-5000</button>     <button type="button" id="rtx-6000"  >rtx-6000</button>     <button type="button" id="rtx-8000"  >rtx-8000</button>     <button type="button" id="rx-550"  >rx-550</button>     <button type="button" id="rx-5500-xt"  >rx-5500-xt</button>     <button type="button" id="rx-5600"  >rx-5600</button>     <button type="button" id="rx-5600-xt"  >rx-5600-xt</button>     <button type="button" id="rx-570"  >rx-570</button>     <button type="button" id="rx-5700"  >rx-5700</button>     <button type="button" id="rx-5700-xt"  >rx-5700-xt</button>     <button type="button" id="rx-580"  >rx-580</button>     <button type="button" id="rx-6800"  >rx-6800</button>     <button type="button" id="rx-vega-56"  >rx-vega-56</button>     <button type="button" id="wx-2100"  >wx-2100</button>     <button type="button" id="wx-3100"  >wx-3100</button>     <button type="button" id="wx-3200"  >wx-3200</button>     <button type="button" id="wx-4100"  >wx-4100</button>     <button type="button" id="wx-5100"  >wx-5100</button>     <button type="button" id="wx-7100"  >wx-7100</button>     <button type="button" id="wx-8200"  >wx-8200</button>
