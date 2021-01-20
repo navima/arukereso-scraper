@@ -23,6 +23,7 @@ jobs:
           mv *.csv arch/ 
           cd arch/
           ..\merge.ps1
+          cd ..
           ls
           ls arch/
 
