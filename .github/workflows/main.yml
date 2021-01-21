@@ -1,0 +1,27 @@
+name: Pages-Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: windows-latest
+
+    steps:
+
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: Make dir
+        run: mkdir public
+
+      - name: Run Script
+        run: |
+          echo (Get-date -format "yyyy-MM-dd") > ./public/index.html
+          .\getTypes.ps1 'https://www.arukereso.hu' 'videokartya-c3142' 5 | .\getPrice.ps1 > ./public/prices.csv
+          
+      - name: GitHub Pages action
+        uses: peaceiris/actions-gh-pages@v3.7.3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
