@@ -4,6 +4,14 @@
     float: right;
 }
 
-.op{
-    display: block;
+.custchart{
+    width: 80%;
+	height: 90%;
+	float: right;
+}
+
+#canv{
+	width: 80%;
+	height: 100%;
+	float:right;
 }
