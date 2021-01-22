@@ -191,6 +191,10 @@ $html = @"
 
         const canv = document.getElementById("canv")
         const ctx = canv.getContext("2d")
+        
+        canv.width = canv.getBoundingClientRect().width
+        canv.height = canv.getBoundingClientRect().height
+
         const width = canv.width
         const height = canv.height
 
