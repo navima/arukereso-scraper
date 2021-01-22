@@ -1,5 +1,5 @@
 # Get files
-$files = Get-ChildItem -path "." | Where-Object { $_.name -match "prices-....-..-..\.csv" } 
+$files = Get-ChildItem -path "." | Where-Object { $_.name -match "prices-....-..-..( .._..)?\.csv" } 
 
 # Get all possible names
 $dnames = @()
@@ -20,7 +20,7 @@ $names | % {
 # Import data
 $files | % {
     $file = $_
-    $nicename = ($_.Name | Select-String -Pattern "prices-(....-..-..)\.csv" ).Matches.Groups[1].Value
+    $nicename = ($_.Name | Select-String -Pattern "prices-(....-..-..( .._..)?)\.csv" ).Matches.Groups[1].Value -replace "_", ":"
     $csv = Import-Csv $_
     $csv | % {
         $csvRecord = $_
