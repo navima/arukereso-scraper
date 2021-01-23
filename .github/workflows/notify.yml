@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  workflow_run:
+    workflows: ["Archive"]
+    types:
+      - completed
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: main
+      - uses: actions/checkout@v2
+        with:
+          ref: archive
+          path: arch
+
+      - env:
+          MAILGUN_API_KEY: ${{ secrets.MAILGUN_API_KEY }}
+        run: |
+          .\notify.ps1 "$env:MAILGUN_API_KEY" ((Get-ChildItem .\arch\ | Sort-Object -Property LastWriteTime)[0])
