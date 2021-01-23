@@ -30,5 +30,7 @@ $watcherlist | % {
         }
     }
 
-    curl --user "api:$MAILGUN_API_KEY" https://api.eu.mailgun.net/v3/vikt0r.eu/messages -F from='Scraper <Scraper@vikt0r.eu>' -F to="$watcher_addr" -F subject='Watch notification' -F text="$text"
+    if (-not $text -eq '') {
+        curl --user "api:$MAILGUN_API_KEY" https://api.eu.mailgun.net/v3/vikt0r.eu/messages -F from='Scraper <Scraper@vikt0r.eu>' -F to="$watcher_addr" -F subject='Watch notification' -F text="$text"
+    }
 }
