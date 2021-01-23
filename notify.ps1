@@ -3,6 +3,8 @@ param (
     $csv_file = ''
 )
 
+echo $csv_file
+
 $csv = Import-Csv $csv_file
 $prices = @{}
 $csv | % {
