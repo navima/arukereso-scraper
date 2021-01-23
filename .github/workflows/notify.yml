@@ -24,4 +24,4 @@ jobs:
       - env:
           MAILGUN_API_KEY: ${{ secrets.MAILGUN_API_KEY }}
         run: |
-          .\notify.ps1 "$env:MAILGUN_API_KEY" ((Get-ChildItem .\arch\ | Sort-Object -Property LastWriteTime)[0])
+          .\notify.ps1 "$env:MAILGUN_API_KEY" ((Get-ChildItem .\arch\ | Where-Object { $_.name -match "prices-....-..-..( .._..)?\.csv" } | Sort-Object -Property LastWriteTime)[0])
