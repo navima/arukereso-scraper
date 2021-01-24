@@ -24,7 +24,7 @@ $watcherlist | % {
         [int]$Value = $_.price
 
         [int]$actualprice = $prices[$Name]
-        if ($prices.ContainsKey($Name) -and $actualprice -lt $Value) {
+        if ($prices.ContainsKey($Name) -and $actualprice -lt $Value -and $actualprice -ne 0) {
             $text += "$Name for $actualprice (<$Value)
             "
         }
