@@ -3,14 +3,6 @@
         "address": "draco.109@gmail.com",
         "watchlist": [
             {
-                "product": "rtx-2060",
-                "price": 133000
-            },
-            {
-                "product": "rx-5600-xt",
-                "price": 134000
-            },
-            {
                 "product": "rtx-2060-super",
                 "price": 150000
             },
@@ -27,16 +19,12 @@
                 "price": 226500
             },
             {
-                "product": "rtx-2080-ti",
-                "price": 260000
-            },
-            {
                 "product": "rtx-3080",
-                "price": 303000
+                "price": 250000
             },
             {
                 "product": "rtx-3090",
-                "price": 346000
+                "price": 250000
             },
             {
                 "product": "rx-5700",
