@@ -35,5 +35,23 @@
                 "price": 162000
             }
         ]
+    },
+    {
+        "address": "beresviktor07@gmail.com",
+        "watchlist": [
+            {
+                "product": "rtx-2060",
+                "price": 140000
+            },{
+                "product": "rx-5600-xt",
+                "price": 140000
+            },{
+                "product": "rtx-2070",
+                "price": 160000
+            },{
+                "product": "rtx-3050",
+                "price": 160000
+            }
+        ]
     }
 ]
