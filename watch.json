@@ -51,6 +51,9 @@
             },{
                 "product": "rtx-3050",
                 "price": 160000
+            },{
+                "product": "rtx-3060",
+                "price": 160000
             }
         ]
     }
