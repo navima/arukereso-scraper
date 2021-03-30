@@ -24,13 +24,21 @@ jobs:
           ref: gh-pages
                 
       - run: |
+          ls
           cd arch\
+          ls
           ..\generateHTML.ps1
+          ls
           mv *.html ..\public -Force
+          ls
           cd ..
+          ls
+          ls public
           
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           branch: 'gh-pages'
           repository: 'public'
           skip_dirty_check: true
+          skip_fetch: true
+          push_options: '--force'
