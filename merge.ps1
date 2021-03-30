@@ -28,9 +28,9 @@ $files | % {
         $objs | Where-Object { $_.Name -eq $csvRecord.Name }[0] | Add-Member $nicename $csvRecord.Value
     }
     if (($objs | Get-Member $nicename) -eq $null) {
-        $objs[0] | Add-Member $nicename
+        $objs[0] | Add-Member $nicename 0
     }
-    
+
 }
 Write-Host $objs[0]
 
