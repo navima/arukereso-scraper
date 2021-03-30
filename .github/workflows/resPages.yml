@@ -26,14 +26,13 @@ jobs:
       - run: |
           ls
           cd arch\
-          ls
           ..\generateHTML.ps1
-          ls
           mv *.html ..\public -Force
-          ls
           cd ..
-          ls
           ls public
+          cd public
+          git commit
+          git push
           
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
