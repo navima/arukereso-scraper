@@ -24,22 +24,13 @@ jobs:
           ref: gh-pages
                 
       - run: |
-          ls
           cd arch\
           ..\generateHTML.ps1
           mv *.html ..\public -Force
           cd ..
-          ls public
-          cd public
-          git config --local user.email "$(git log --format='%ae' HEAD^!)"
-          git config --local user.name "$(git log --format='%an' HEAD^!)"
-          git commit -m Apply automatic changes
-          git push
           
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           branch: 'gh-pages'
           repository: 'public'
           skip_dirty_check: true
-          skip_fetch: true
-          push_options: '--force'
