@@ -20,6 +20,7 @@ jobs:
       - name: Run Script
         run: |
           $ErrorActionPreference= 'silentlycontinue'
+          cat .\archive.ps1
           .\archive.ps1
           mv *.csv arch/ 
           cd arch/
