@@ -20,12 +20,17 @@ $names | % {
 # Import data
 $files | % {
     $file = $_
-    $nicename = ($_.Name | Select-String -Pattern "prices-(....-..-..( .._..)?)\.csv" ).Matches.Groups[1].Value -replace "_", ":"
-    $csv = Import-Csv $_
+    # the date as a string
+    $nicename = ($file.Name | Select-String -Pattern "prices-(....-..-..( .._..)?)\.csv" ).Matches.Groups[1].Value -replace "_", ":"
+    $csv = Import-Csv $file
     $csv | % {
         $csvRecord = $_
         $objs | Where-Object { $_.Name -eq $csvRecord.Name }[0] | Add-Member $nicename $csvRecord.Value
     }
+    if (($objs | Get-Member $nicename) -eq $null) {
+        $objs[0] | Add-Member $nicename
+    }
+    
 }
 
 Write-Host $objs
