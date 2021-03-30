@@ -31,7 +31,9 @@ jobs:
           cd ..
           ls public
           cd public
-          git commit
+          git config --local user.email "$(git log --format='%ae' HEAD^!)"
+          git config --local user.name "$(git log --format='%an' HEAD^!)"
+          git commit -m Apply automatic changes
           git push
           
       - uses: stefanzweifel/git-auto-commit-action@v4
