@@ -19,7 +19,15 @@
                 "price": 226500
             },
             {
+                "product": "rtx-3070-ti",
+                "price": 250000
+            },
+            {
                 "product": "rtx-3080",
+                "price": 250000
+            },
+            {
+                "product": "rtx-3080-ti",
                 "price": 250000
             },
             {
