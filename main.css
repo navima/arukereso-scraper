@@ -1,0 +1,42 @@
+:root {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.main {
+    display: flex;
+    flex-direction: row;
+    overflow-x: hidden;
+}
+
+table {
+    border: 1px solid green;
+    border-collapse: collapse;
+    width: max-content;
+    min-width: max-content;
+}
+
+.vertical-flex {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.custchart {
+    flex-grow: 1;
+    width: 100%;
+    padding: 3em;
+    height: 45vh;
+}
+
+#canv {
+    width: 100%;
+    height: 45vh;
+}
+
+.chart {
+    height: 45vh;
+}
+
+tr:nth-child(2n){
+    background-color: rgb(228, 243, 255);
+}
