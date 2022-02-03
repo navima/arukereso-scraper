@@ -24,10 +24,14 @@ jobs:
           ref: gh-pages
                 
       - run: |
-          mv indexTemplate.html arch\ -Force
+          mv *.js arch\ -Force
+          mv *.html arch\ -Force
+          mv *.css arch\ -Force
           cd arch\
           ..\generateHTML.ps1
           mv *.html ..\public -Force
+          mv *.js ..\public -Force
+          mv *.css ..\public -Force
           cd ..
           
       - uses: stefanzweifel/git-auto-commit-action@v4
