@@ -37,6 +37,48 @@ table {
     height: 45vh;
 }
 
-tr:nth-child(2n){
+tr:nth-child(2n) {
     background-color: rgb(228, 243, 255);
+}
+
+/* Main Classes */
+.checkbox[type="checkbox"]:before {
+    position: relative;
+    display: block;
+    width: 11px;
+    height: 11px;
+    border: 1px solid #808080;
+    content: "";
+    background: #FFF;
+}
+
+.checkbox[type="checkbox"]:after {
+    position: relative;
+    display: block;
+    left: 2px;
+    top: -11px;
+    width: 9px;
+    height: 9px;
+    content: "";
+}
+
+.checkbox[type="checkbox"]:checked:after {
+    background-color: rgb(44, 185, 44);
+}
+
+.checkbox[type="checkbox"]:disabled:after {
+    -webkit-filter: opacity(0.4);
+}
+
+.checkbox[type="checkbox"]:not(:disabled):checked:hover:after {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAQAAABuW59YAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAB2SURBVHjaAGkAlv8A3QDyAP0A/QD+Dam3W+kCAAD8APYAAgTVZaZCGwwA5wr0AvcA+Dh+7UX/x24AqK3Wg/8nt6w4/5q71wAAVP9g/7rTXf9n/+9N+AAAtpJa/zf/S//DhP8H/wAA4gzWj2P4lsf0JP0A/wADAHB0Ngka6UmKAAAAAElFTkSuQmCC'), linear-gradient(135deg, #8BB0C2 0%, #FFF 100%);
+}
+
+.checkbox[type="checkbox"]:not(:disabled):hover:after {
+    background-image: linear-gradient(135deg, #8BB0C2 0%, #FFF 100%);
+    border-color: #85A9BB #92C2DA #92C2DA #85A9BB;
+}
+
+.checkbox[type="checkbox"]:not(:disabled):hover:before {
+    border-color: #3D7591;
 }
