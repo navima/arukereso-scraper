@@ -1,5 +1,6 @@
 param (
     [string]$MAILGUN_API_KEY = '',
+    [string]$WATCHLIST_SOURCE = '',
     $csv_file = ''
 )
 
@@ -11,7 +12,8 @@ $csv | % {
     $prices.Add($_.Name, $_.Value)
 }
 
-$watcherlist = cat watch.json | ConvertFrom-Json 
+$watcherListJson = curl $WATCHLIST_SOURCE
+$watcherlist = $watcherListJson | ConvertFrom-Json 
 
 $watcherlist | % {
     $watcher_addr = $_.address
