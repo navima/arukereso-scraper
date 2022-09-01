@@ -36,7 +36,7 @@ $watcherlist | Where-Object {
 
         [int]$actualprice = $prices[$Name]
         if ($prices.ContainsKey($Name) -and $actualprice -lt $Value -and $actualprice -ne 0) {
-            $text += "$Name for $actualprice (<$Value)
+            $text += "$Name for $actualprice (<$Value) https://www.arukereso.hu/videokartya-c3142/$Name/?orderby=1
 "
         }
     }
