@@ -1,10 +1,14 @@
 # Árukereső Scraper
 
-PowerShell scripts to scrape a *certain* website.
+PowerShell scripts to scrape [arukereso.hu](https://arukereso.hu) for GPU prices.
 
-Also a summarizing Excel Worksheet
+Extra scripts to send notification emails to addresses based on a watchlist.
 
-## Requirements:
+Github Actions configurations that run these scripts correctly and generate HTMLs.
+
+A dynamic excel worksheet that summarizes scraped data and calculates various things.
+
+## Requirements
 
 ### The scripts use
 
@@ -15,11 +19,10 @@ You will be prompted to install PowerHTML if it isn't detected
 
 ### Other
 
-* The Excel Worksheet has PowerQuery queries to the filenames in the _[Example:](#example)_ section;  
-The paths are dynamic, so the .xlsx, and .csv files need only be in the same folder.  
-I don't know if other software support PowerQuery, so I assume this can only be worked with in MS Excel.
+* The Excel Worksheet has PowerQuery queries to the filenames in the _[Example](#example)_ section;  
+The paths are relative, so the .xlsx, and .csv files need only be in the same folder.  
 
-## Usage:
+## Usage
 
 ### GetTypes
 
@@ -40,7 +43,7 @@ Returns: `string[]`
 
 Returns: `string[]` (CSV)
 
-## Example:
+## Example
 
 ### Refreshing prices
 
