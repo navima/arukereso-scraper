@@ -1,11 +1,6 @@
-name: CI
+name: notify
 
 on:
-  workflow_run:
-    workflows: ["Archive"]
-    types:
-      - completed
-
   workflow_dispatch:
 
 jobs:
