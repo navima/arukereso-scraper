@@ -32,7 +32,5 @@ $files | % {
     }
 
 }
-Write-Host $objs[0]
 
-Write-Host $objs
 Write-Output $objs | ConvertTo-Csv

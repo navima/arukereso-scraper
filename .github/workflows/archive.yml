@@ -26,8 +26,6 @@ jobs:
           cat ..\merge.ps1
           ..\merge.ps1 > merged.csv
           cd ..
-          ls
-          ls arch/
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
